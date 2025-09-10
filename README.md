@@ -1,0 +1,1 @@
+# Django-mini-project-folder-2
