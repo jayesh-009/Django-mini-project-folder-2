@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/static/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/movie.css">
+
+</head>
+<body>
+    <h1>Movie Information</h1>
+
+    {% if movie_list %}
+
+    <table>
+        <thead>
+            <th>Released Date</th>
+            <th>Movie Name</th>
+            <th>Hero</th>
+            <th>Heroine</th>
+            <th>Rating</th>
+
+        </thead>
+
+        {% for movie in movie_list %}
+
+        <tr>
+            <td>{{movie.rdate}}</td>
+            <td>{{movie.moviename}}</td>
+            <td>{{movie.hero}}</td>
+            <td>{{movie.heroine}}</td>
+            <td>{{movie.rating}}</td>
+
+        </tr>
+
+        {% endfor %}
+
+        
+    </table>
+
+    {% else %}
+
+    <p>No Movies Found</p>
+
+    {% endif %}
+
+</body>
+</html>

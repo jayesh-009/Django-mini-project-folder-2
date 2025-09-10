@@ -1,0 +1,11 @@
+img{
+    height: 500px;
+    width: 500px;
+
+    border: 10px solid groove;
+    margin: 0% 20%;
+}
+h1{
+    color: brown;
+    text-align: center;
+}

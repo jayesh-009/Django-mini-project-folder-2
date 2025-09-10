@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+	<script src="/static/jquery/jquery.js"></script>
+</head>
+<body>
+<table align="center" width="300">
+	<caption>Student Registration</caption>
+	<tr>
+		<td width="100">Roll</td>
+		<td><input type="text" id="roll"></td>
+	</tr>
+	<tr>
+		<td width="100">Name</td>
+		<td><input type="text" id="name"></td>
+	</tr>
+	<tr>
+		<td width="100">City</td>
+		<td><input type="text" id="city"></td>
+	</tr>
+	
+	<tr>
+		<td><input type="button" id="save" value="Save"></td>
+		<td><input type="button" id="reset" value="Reset"></td>
+	</tr>
+</table>
+<center>
+	Search<input type="text" id="myid">
+</center>
+<table align="center" border="1">
+	<caption>Student Details</caption>
+	<tr align="center">
+		<td width="100">Roll</td>
+		<td width="100">Name</td>
+		<td width="100">City</td>
+		<td width="100">Edit</td>
+		<td width="100">Delete</td>
+	</tr>
+	<tbody id="t1">
+		
+	</tbody>
+</table>
+<script>
+$(document).ready(function()
+	{
+		$('#reset').click(function() 
+			{
+				$('#roll').val('');
+				$('#name').val('');
+				$('#city').val('');
+			});
+		
+		$('#save').click(function()
+			{
+				var roll1=$('#roll').val();
+				var name1=$('#name').val();
+				var city1=$('#city').val();
+				var mydata={roll:roll1,name:name1,city:city1};
+				$.ajax({
+					url:"{% url 'myadd' %}",
+					method:'get',
+					data:mydata,
+					success:function(result)
+					{
+						alert(result.data);
+						Show();
+					},
+				});
+			});
+		$("#myid").on('keyup',function()
+			{
+				var value=$(this).val().toLowerCase();
+				$('#t1 tr').filter(function() 
+					{
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+					});
+			});
+
+		$('tbody').on('click','#delete',function()
+			{
+				var id1=$(this).attr('value');
+				
+				var mydata={id:id1};
+				$.ajax({
+					url:"{% url 'mydel' %}",
+					method:'get',
+					data:mydata,
+					success:function(result)
+					{
+						alert(result.data);
+						Show();
+					},
+				});
+			});
+		$('tbody').on('click','#edit',function()
+			{
+				var id=$(this).attr('value');
+				var mydata={id:id};
+				$.ajax({
+
+					url:"{% url 'myup' %}",
+					method:'get',
+					data:mydata,
+					success:function(result)
+					{
+						$('#roll').val(result.key['id']);
+						$('#name').val(result.key['name']);
+						$('#city').val(result.key['city']);
+					},
+				});
+			});
+
+
+		Show();
+		function Show()
+		
+		{
+			
+			$.ajax({
+				url:"{% url 'myfetch' %}",
+				method:'get',
+				success: function(result)
+				{
+					var obj=result.key;
+					var len=obj.length;
+					var i;
+					var row='';
+					for(i=0;i<len;i++)
+					{
+						row+="<tr align=center><td>"+obj[i].id+"</td><td>"+obj[i].name+"</td><td>"+obj[i].city+"</td><td> <button id=edit value='"+obj[i].id+"'>Edit</button> </td><td><button id=delete value='"+obj[i].id+"'>Delete</button></td></tr>";
+					}
+					$("#t1").html(row);
+
+				},
+			});
+		}
+	});
+</script>
+</body>
+</html>

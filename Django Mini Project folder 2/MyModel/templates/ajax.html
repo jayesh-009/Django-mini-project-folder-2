@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title>My Page</title>
+	<script src="/static/jquery/jquery.js"></script>
+</head>
+<body>
+	<table align="center" width="300">
+		<caption>Student Info</caption>
+		<tr>
+			<td width="150">Id</td>
+			<td><input type="text" name="id" id="roll"></td>
+		</tr>
+
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="name" id="name"></td>
+		</tr>
+
+		<tr>
+			<td>City</td>
+			<td><input type="text" name="city" id="city"></td>
+		</tr>
+
+		<tr>
+			<td><input type="button" value="Save" id="save"></td>
+			<td><input type="reset" value="Reset"></td>
+		</tr>
+		
+	</table>
+
+	<table align="center" border="1" width="300">
+
+		<tr align="center">
+			<td>Roll</td>
+			<td>Name</td>
+			<td>City</td>
+			<td>Edit</td>
+			<td>Delete</td>
+			
+		</tr>
+
+		<tr align="center">
+			<td>1</td>
+			<td>Nikita Patil</td>
+			<td>Pune</td>
+			<td>Edit</td>
+			<td>Delete</td>
+			
+		</tr>
+		
+
+	</table>
+
+	<script>
+		$(document).ready(function()
+			{
+				$("#save").click(function()
+					{
+						var roll=$("#roll").val();
+						var name=$("#name").val();
+						var city=$("#city").val();
+
+						mydata={roll:roll,name:name,city:city};
+
+						$.ajax({
+
+							url:"{% url 'mysave' %}",
+							method:"get",
+							data:mydata,
+							success:function(result)
+							{
+								alert(result.data)
+							},
+
+						});
+					});
+			});
+	</script>
+
+</body>
+</html>

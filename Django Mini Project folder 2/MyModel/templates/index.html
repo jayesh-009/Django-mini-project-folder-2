@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Web Page</title>
+</head>
+<body>
+	<form method="post">
+		{% csrf_token %}
+		<table align="center" width="300">
+			<caption>Student Info</caption>
+			<tr >
+				<td width="150">Id</td>
+				<td><input type="text" name="roll" value="{{ id }}"></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" name="name" value="{{ name }}"></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td><input type="text" name="city" value="{{ city }}"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Submit"></td>
+				<td><input type="reset" value="Reset"></td>
+			</tr>
+
+		</table>	
+	</form>
+
+
+<table border="1" align="center" width="300">
+	<caption>Student Details</caption>
+
+	<tr align="center">
+		<td>Roll</td>
+		<td>Name</td>
+		<td>City</td>
+		<td>Edit</td>
+		<td>Delete</td>
+	</tr>
+
+	{% for x in data1 %}
+	<tr align="center">
+		<td>{{ x.id }}</td>
+		<td>{{ x.name }}</td>
+		<td>{{ x.city }}</td>
+		
+		<td><a href="/myinsert?id={{ x.id }}&name={{ x.name }}&city={{ x.city }}">Edit</a></td>
+		<td><a href="/mydelete?id={{ x.id }}">Delete</a></td>
+	</tr>
+	{% endfor %}
+
+</table>
+</body>
+</html>

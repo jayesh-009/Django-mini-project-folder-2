@@ -1,0 +1,37 @@
+body{
+    background: url('/static/13.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container.jumbotron{
+    margin-top: 200px;
+    background: orange;
+    color: antiquewhite;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+
+
+}
+table,tr,td,thead,th{
+    border: 2px solid palevioletred;
+
+    font-size: 30px;
+    color: chartreuse;
+
+    background: red;
+    margin: auto;
+    text-align: center;
+}
+thead,th{
+    border: 2px solid red;
+    font-size: 30px;
+    margin: auto;
+    color: blue;
+    background: yellow;
+
+}
+h1{
+    text-align: center;
+}
